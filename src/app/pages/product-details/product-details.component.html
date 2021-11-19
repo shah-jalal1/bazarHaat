@@ -1,0 +1,163 @@
+<section class="product-details">
+    <div class="container">
+            <!--******* details-main-area *****-->
+    <div class="product-details-main">
+        <!--**** product-img ***-->
+        <div class="product-img">
+          <!--Main Img-->
+          <div class="product-img1">
+            <img [src]="image"
+                 [alt]="product?.productName"
+                 (mousemove)="onMouseMove($event)"
+                 (mouseleave)="onMouseLeave($event)">
+            <div class="product-discount">
+              <div class="discount">
+                <span>-{{product ? product?.discountType : 0}}%</span>
+              </div>
+            </div>
+          </div>
+          <!--- slide-img -->
+          <div class="product-img-slide">
+  
+            <swiper [slidesPerView]="1"
+            [autoplay]="{
+              delay: 4000,
+              disableOnInteraction:false
+            }"
+            [breakpoints]="{
+              '0':{
+                slidesPerView: 3,
+                spaceBetween: 15
+              }
+            }"
+            [navigation]="true"
+            class="mySwiper small-carousel"
+          >
+            <ng-template swiperSlide  *ngFor="let slider of product?.images; let i = index;">
+              <div class="slide-img" (click)="selectImage(slider)">
+                <img [src]="slider" [alt]="product?.productName">
+              </div>
+              </ng-template>
+          </swiper>
+  
+          </div>
+        </div>
+  
+        <!----***** product-info ****-->
+  
+        <div class="product-info">
+  
+          <div style="z-index: 9;" #zoomViewer>
+            <div *ngIf="zoomImage" class="zoom-viewer"
+                 [ngStyle]="{'background-image': 'url(' + zoomImage + ')'}"></div>
+          </div> <!-- END IMAGE ZOOM VIEW -->
+  
+          <!--- product-title -->
+          <div class="product-title">
+            <h2>{{product?.productName}}</h2>
+          </div>
+          <!---brand-->
+          <div class="product-brand-area">
+            <div class="product-brand">
+              <div><span>Brand:</span></div>
+              <div><a [routerLink]="['/product-list', 'brand', product?.brand]">{{product?.brand}}</a></div>
+            </div>
+            <span>More Drugs From {{product?.brand}}</span>
+          </div>
+           <!--product-price-->
+          <div class="product-price">
+             <!--discount-->
+             <!-- [fxShow]="selectedPriceData?.discountAmount && selectedPriceData?.discountAmount > 0" -->
+                <div class="cart-product-discount" >
+                  <span>MRP <del>৳{{product?.discountAmount}}</del> <strong> {{product ? product?.discountType : 0}}% OFF</strong></span>
+                </div>              
+                <div class="product-main-price">
+                  <h3>৳{{product?.price}}</h3>
+                </div>
+            </div>
+            <div class="cart-product-bottom">
+              <!---bottom-left-->
+
+              <!--bottom-right-->
+              <div class="bottom-right">
+                  <!--cart-items-count-->
+                <div class="cart-items-count">
+                  <!---mines-->
+                  <div class="mines-btn">
+                    <button type="button" (click)="decrementQty()">-</button>
+                  </div>
+                  <!---cart-input-box-->
+                  <div class="cart-input-box">
+                    <input type="text" [value]="selectedQty" >
+                  </div>
+                  <!--cart-plus-->
+                  <div class="plus-btn">
+                    <button type="button" (click)="incrementQty()">+</button>
+                  </div>
+    
+                </div>
+              </div>
+            </div>
+  
+          <!-- Product-aad-and- item value-area  -->
+          <div class="product-btn">
+           <div class="add-btn" *ngIf="!existsInCart">
+             <a mat-button (click)="addToCart()">ADD TO CART</a>
+           </div>
+           <div class="add-btn" *ngIf="existsInCart">
+             <a mat-button routerLink="/cart">Go TO CART</a>
+           </div>
+          <!-- <div class="add-btn">
+            <a mat-button (click)="addToCart()">ADD TO CART</a>
+          </div> -->
+          <!-- Product-aad-and- item value-area  -->
+            <!-- <div class="add-btn">
+              <a mat-button (click)="buyNow()">Buy Now</a>
+            </div> -->
+          </div>
+        </div>
+        <!---product-other-details-area-->
+        <div class="product-other-details-area">
+          <!-- Product-description -->
+                <div class="product-discription">
+                  <!---delivery-title-->
+                  <div class="delivery-title">
+                    <h3>Delivery Option</h3>
+                  </div>
+                  <ul>
+                    <li><i class="fa fa-check-circle"></i><span>Home Delivery</span></li>
+                    <li><i class="fa fa-check-circle"></i><span>100% Authentic</span></li>
+                    <li><i class="fa fa-check-circle"></i><span>14 Days Easy Return</span></li>
+                    <li><i class="fa fa-check-circle"></i><span>Warranty not Available</span></li>
+                    <li><i class="fa fa-check-circle"></i><span>Cash on Delivery</span></li>
+                  </ul>
+              </div>
+            <!---alternative-btn-->
+            <div class="alternative-btn">
+              <a routerLink="/coming-soon">alternative brands</a>
+            </div>
+  
+        </div>
+      </div>
+    </div>
+</section>
+
+<!---section-1-->
+<section class="section-1">
+    <div class="container">
+      <!--section1-main--->
+      <div class="section1-main">
+        <!--section1-left-->
+        <div class="section1-left">
+          <!--section1-description-->
+          <div class="section1-description">
+            <h3>Description</h3>
+          </div>
+          <div class="description" [innerHTML]="product?.description"></div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

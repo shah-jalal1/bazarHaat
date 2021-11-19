@@ -1,0 +1,62 @@
+<header class="header" [class.toolbar-small]="scrollPosition > 714">
+  <div class="container" [ngClass]="{'toolbar-scroll': scrollPosition > 714}">
+        <div class="logo">
+        <!--menu-bar-->
+        <div class="menu-bar no-select" (click)="onToggleSidenav()">
+            <span><i class="fa fa-bars"></i></span>
+        </div>
+        <div>
+            <a routerLink="/" style="text-decoration: none">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Goodreads_logo.svg/1280px-Goodreads_logo.svg.png" alt="Orajon">
+            </a>
+        </div>
+        </div> <!-- END LOGO -->
+        
+    <!---header-right-area-->
+    <div class="header-right">
+
+        <!--header-right-responsive-->
+        <div class="header-right-responsive">
+          <ul>
+            <li><a routerLink="/login"><i class="fas fa-user-circle"></i> <span>
+              {{isUserAuth ? 'My Account' : 'Log In / Sign Up'}}
+            </span></a></li>
+            <li><a routerLink="/cart" (click)="cartSlideActive()"><i class="fa fa-shopping-cart"></i> <span>Cart(0)</span></a></li>
+          </ul>
+        </div>
+  
+        <!---header-right-->
+        <div class="header-right-main">
+          <ul>
+            <li><a routerLink="/login"><i class="fas fa-user-circle"></i> <span>
+              {{isUserAuth ? 'My Account' : 'Log In / Sign Up'}}
+            </span></a></li>
+            <!-- <li>{{carts | json}}</li> -->
+            <li><a href="/cart" (click)="cartSlideActive()"><i class="fa fa-shopping-cart"></i> <span>Cart({{carts.length}})</span></a></li>
+          </ul>
+  
+        </div>
+  
+      </div>
+    </div>
+
+   <!-- menu start -->
+   <div  class="basic-container"   >
+    <span *ngFor="let item of navItems">
+      <!-- Handle branch node buttons here -->
+      <span *ngIf="item.children && item.children.length > 0">
+        <button mat-button color="primary" [matMenuTriggerFor]="menu.childMenu">
+          {{item.displayName}}
+        </button>
+        <app-menu-item #menu [items]="item.children"></app-menu-item>
+      </span>
+      <!-- Leaf node buttons here -->
+      <span *ngIf="!item.children || item.children.length === 0">
+        <button mat-button color="primary" [routerLink]="item.route">
+          {{item.displayName}}
+        </button>
+      </span>
+    </span>
+  </div>
+  <!-- menu end -->
+</header>
