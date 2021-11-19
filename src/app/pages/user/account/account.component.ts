@@ -192,7 +192,7 @@ export class AccountComponent implements OnInit {
   onLogout() {
     this.userService.userLogOut();
   }
-  
+
   onLinkChange() {
     this.isHandset$.subscribe((isHandset) => {
       if (isHandset) {

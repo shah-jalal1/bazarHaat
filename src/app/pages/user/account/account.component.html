@@ -15,7 +15,7 @@
           <p>{{user?.phoneNo ? user.phoneNo : 'N/A'}}</p>
         </div>
       </div> <!--  END PROFILE VIEW -->
-  
+
       <div class="nav-link">
         <ul>
           <li (click)="onLinkChange()" [routerLink]="['basic-info']" routerLinkActive="active-list">
@@ -28,11 +28,11 @@
           </li>
         </ul>
       </div>
-  
-  
+
+
     </div>
     <div class="content-view" >
       <router-outlet></router-outlet>
     </div>
   </div>
-  
+
