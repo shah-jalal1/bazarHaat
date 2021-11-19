@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Pagination
   currentPage = 1;
   totalProducts = 0;
-  productsPerPage = 16;
+  productsPerPage = 8;
   // totalProductsStore = 0;
 
 

@@ -9,7 +9,7 @@ HEADER CONTROL WITH AUTO COMPLETE
     padding: 15px 10px 10px 10px;
     position: fixed;
     z-index: 999 !important;
-    background-color: #F4F1EA;
+    background-color: #4c26a5;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -54,7 +54,7 @@ HEADER CONTROL WITH AUTO COMPLETE
     }
     .menu-bar span{
       padding: 5px;
-      color: #fff;
+      color: $color-primary;
       font-size: 19px;
       display: block;
       position: relative;
@@ -121,7 +121,7 @@ HEADER CONTROL WITH AUTO COMPLETE
     font-family: $font-en-primary;
     font-weight: 500;
     font-size: 15px;
-    color: #fff;
+    color: $color-primary;
     padding: 3px 5px;
     box-sizing: border-box;
     display: flex;
@@ -130,13 +130,13 @@ HEADER CONTROL WITH AUTO COMPLETE
     gap: 5px;
   }
   .header-right-responsive ul li .upload-pres{
-    background-color: #004952;
+    background-color: $color-primary;
     font-family: $font-en-primary;
     font-weight: 500;
     font-size: 14px;
     max-width: 100%;
     display: inline-block;
-    color: #fff;
+    color: $color-primary;
     padding: 8px 12px;
     border-radius: 20px;
     text-align: center;

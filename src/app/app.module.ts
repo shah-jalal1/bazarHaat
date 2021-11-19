@@ -12,10 +12,11 @@ import { SharedModule } from './shared/shared.module';
 import { AuthUserInterceptor } from './auth-interceptor/auth-user.interceptor';
 
 import { environment } from '../environments/environment';
+import { TestComponent } from './core/test/test.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TestComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

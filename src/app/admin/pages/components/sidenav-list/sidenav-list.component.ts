@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MenuAdmin } from 'src/app/interfaces/menu-admin';
-import { MenuCtrService } from 'src/app/services/menu-ctr.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {MenuAdmin} from '../../../../interfaces/menu-admin';
+import {MenuCtrService} from '../../../../services/menu-ctr.service';
+
 
 @Component({
   selector: 'app-sidenav-list',
@@ -9,7 +10,6 @@ import { MenuCtrService } from 'src/app/services/menu-ctr.service';
 })
 export class SidenavListComponent implements OnInit {
 
- 
   @Input() menuItems: MenuAdmin[];
   @Input() menuParentId: string = null;
 
@@ -23,12 +23,12 @@ export class SidenavListComponent implements OnInit {
 
   ngOnInit() {
     this.parentMenu = this.menuItems.filter(item => item.parentId === this.menuParentId);
-    console.log(this.parentMenu)
   }
 
   onClick(menuId) {
     this.menuCtrService.toggleMenuItemAdmin(menuId);
     this.menuCtrService.closeOtherSubMenusAdmin(this.menuItems, menuId);
   }
+
 
 }

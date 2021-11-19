@@ -16,7 +16,7 @@ import {AdminRoleEnum} from '../../enum/admin-role.enum';
   styleUrls: ['./pages.component.scss']
 })
 export class PagesComponent implements OnInit, AfterViewInit {
- 
+
   @Output() @ViewChild('sidenav', {static: true}) sidenav;
   @Input() isAdminMenu = false;
   @Input() sideNavMenuList: any[];
@@ -46,37 +46,34 @@ export class PagesComponent implements OnInit, AfterViewInit {
     private router: Router,
     private adminService: AdminService,
   ) {
-
   }
 
   ngOnInit() {
     // Google No Index
     this.googleNoIndex();
-    this.menuList = menuItemsSuperAdmin;
-    console.log('Super Admin: ', this.menuList);
-    // const role = this.adminService.getAdminRole();
-    // switch (role) {
-    //   case AdminRoleEnum.SUPER_ADMIN: {
-    //     this.menuList = menuItemsSuperAdmin;
-    //     break;
-    //   }
-    //   case AdminRoleEnum.ADMIN: {
-    //     this.menuList = menuItemsAdmin;
-    //     break;
-    //   }
-    //   case AdminRoleEnum.EDITOR: {
-    //     this.menuList = menuItemsEditor;
-    //     break;
-    //   }
-    //   default: {
-    //     this.menuList = [];
-    //     break;
-    //   }
-    // }
+
+    const role = this.adminService.getAdminRole();
+    switch (role) {
+      case AdminRoleEnum.SUPER_ADMIN: {
+        this.menuList = menuItemsSuperAdmin;
+        break;
+      }
+      case AdminRoleEnum.ADMIN: {
+        this.menuList = menuItemsAdmin;
+        break;
+      }
+      case AdminRoleEnum.EDITOR: {
+        this.menuList = menuItemsEditor;
+        break;
+      }
+      default: {
+        this.menuList = [];
+        break;
+      }
+    }
   }
 
   ngAfterViewInit(): void {
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (window.innerWidth <= 599) {
@@ -93,7 +90,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
    * SEO META TAGS
    */
 
-   private googleNoIndex() {
+  private googleNoIndex() {
     this.meta.updateTag({name: 'robots', content: 'noindex'});
     this.meta.updateTag({name: 'googlebot', content: 'noindex'});
   }
