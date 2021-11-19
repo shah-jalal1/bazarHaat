@@ -8,10 +8,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProductAttribute} from '../../../../interfaces/product-attribute';
 import {ProductBrand} from '../../../../interfaces/product-brand';
 import {ProductCategory} from '../../../../interfaces/product-category';
-
+import {ProductSubCategory} from '../../../../interfaces/product-sub-category';
 import {BrandService} from '../../../../services/brand.service';
 import {CategoryService} from '../../../../services/category.service';
-
+import {SubCategoryService} from '../../../../services/sub-category.service';
 import {MatSelectChange} from '@angular/material/select';
 import {Select} from '../../../../interfaces/select';
 import {ProductService} from '../../../../services/product.service';
@@ -23,9 +23,12 @@ import {MatDialog} from '@angular/material/dialog';
 import {ImageGalleryDialogComponent} from '../../gallery/image-gallery-dialog/image-gallery-dialog.component';
 import {MatOption} from '@angular/material/core';
 import {Editor} from 'ngx-editor';
-import {HttpStatusCodeEnum} from '../../../../enum/http-status-code.enum';
+import {HttpStatusCodeEnum} from '../../../../enum/http-status-code';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ProductUnitType} from '../../../../interfaces/product-unit-type';
+import {UnitTypeService} from '../../../../services/unit-type.service';
+import {ProductGeneric} from '../../../../interfaces/product-generic';
+import {GenericService} from '../../../../services/generic.service';
 
 @Component({
   selector: 'app-add-product',
@@ -79,18 +82,18 @@ export class AddProductComponent implements OnInit, OnDestroy {
   // SELECT DATA
   brands: ProductBrand[] = [];
   categories: ProductCategory[] = [];
-  // subCategories: ProductSubCategory[] = [];
-  // unitTypes: ProductUnitType[] = [];
-  // generics: ProductGeneric[] = [];
+  subCategories: ProductSubCategory[] = [];
+  unitTypes: ProductUnitType[] = [];
+  generics: ProductGeneric[] = [];
   // attributes: ProductAttribute[] = [];
   // tags: ProductTag[] = [];
 
   // Select Filter
   public filteredCatList: ProductCategory[];
-  // public filteredSubCatList: ProductSubCategory[];
+  public filteredSubCatList: ProductSubCategory[];
   public filteredBrandList: ProductBrand[];
-  // public filteredGenericList: ProductGeneric[];
-  // public filteredUnitTypeList: ProductUnitType[];
+  public filteredGenericList: ProductGeneric[];
+  public filteredUnitTypeList: ProductUnitType[];
   // public filteredAttributesList: ProductAttribute[];
   // public filteredTagsList: ProductTag[];
 
@@ -114,15 +117,6 @@ export class AddProductComponent implements OnInit, OnDestroy {
   editorPaymentPolicy: Editor;
   editorDeliveryPolicy: Editor;
   editorShortDescription: Editor;
-  subCategories: any;
-  unitTypes: any;
-  subCategoryService: any;
-  filteredSubCatList: any;
-  unitTypeService: any;
-  filteredUnitTypeList: any;
-  genericService: any;
-  generics: any;
-  filteredGenericList: any;
 
 
   constructor(
@@ -134,10 +128,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
     // private attributeService: AttributeService,
     private brandService: BrandService,
     private categoryService: CategoryService,
-    // private subCategoryService: SubCategoryService,
+    private subCategoryService: SubCategoryService,
     private productService: ProductService,
-    // private unitTypeService: UnitTypeService,
-    // private genericService: GenericService,
+    private unitTypeService: UnitTypeService,
+    private genericService: GenericService,
     // private tagService: TagService,
     private spinner: NgxSpinnerService,
     private activatedRoute: ActivatedRoute,
@@ -168,8 +162,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
         // GET ALL SELECTED DATA
         this.getAllCategory();
         this.getAllBrands();
-        // this.getAllGenerics();
-        // this.getAllUnitTypes();
+        this.getAllGenerics();
+        this.getAllUnitTypes();
         // this.getAllAttributes();
         // this.getAllTags();
       }
@@ -228,33 +222,33 @@ export class AddProductComponent implements OnInit, OnDestroy {
       productSlug: [null, Validators.required],
       images: [null],
       sku: [null],
-      price: [null, Validators.required],
-      discountType: [null],
-      discountAmount: [null],
+      // price: [null, Validators.required],
+      // discountType: [null],
+      // discountAmount: [null],
       // stockVisibility: [null],
       productVisibility: [null, Validators.required],
       // quantity: [null],
       // soldQuantity: [null],
       category: [null],
       // categorySlug: [null],
-      // subCategory: [null],
+      subCategory: [null],
       // subCategorySlug: [null],
       brand: [null],
       // brandSlug: [null],
-      // generic: [null],
+      generic: [null],
       // genericSlug: [null],
       // tags: [null],
       // warrantyServices: [null],
       // shortDescription: [null],
       description: [null],
       // attributes: [null],
-      // deliveryPolicy: [null],
-      // paymentPolicy: [null],
+      deliveryPolicy: [null],
+      paymentPolicy: [null],
       // warrantyPolicy: [null],
       // campaignStartDate: [null],
       // campaignEndDate: [null],
       // emiStatus: [null],
-      // prices: this.fb.array([])
+      prices: this.fb.array([])
     });
 
     this.priceDataArray = this.dataForm.get('prices') as FormArray;
@@ -267,32 +261,35 @@ export class AddProductComponent implements OnInit, OnDestroy {
       return;
     }
     this.spinner.show();
-    // let subCategorySlug;
-    // let genericSlug;
+    let subCategorySlug;
+    let genericSlug;
     const rawData = this.dataForm.value;
     const categorySlug = this.categories.find(f => f._id === rawData.category).categorySlug;
-    // if (rawData.subCategory) {
-    //   subCategorySlug = this.subCategories.find(f => f._id === rawData.subCategory).subCategorySlug;
-    // }
+    if (rawData.subCategory) {
+      subCategorySlug = this.subCategories.find(f => f._id === rawData.subCategory).subCategorySlug;
+    }
     const brandSlug = this.brands.find(f => f._id === rawData.brand).brandSlug;
-    // if (rawData.generic) {
-    //   genericSlug = this.generics.find(f => f._id === rawData.generic).slug;
-    // }
+    if (rawData.generic) {
+      genericSlug = this.generics.find(f => f._id === rawData.generic).slug;
+    }
     const images = this.chooseImage;
     const mData = {
       categorySlug,
-      // subCategorySlug: subCategorySlug ? subCategorySlug : null,
-      // genericSlug: genericSlug ? genericSlug : null,
+      subCategorySlug: subCategorySlug ? subCategorySlug : null,
+      genericSlug: genericSlug ? genericSlug : null,
       brandSlug,
-      price: rawData.price ? rawData.price : 0,
-      discountType: rawData.price ? rawData.price.discountType : null,
-      discountAmount: rawData.price? rawData.price.discountAmount : null,
+      price: rawData.prices.length ? rawData.prices[0].price : 0,
+      discountType: rawData.prices.length ? rawData.prices[0].discountType : null,
+      discountAmount: rawData.prices.length ? rawData.prices[0].discountAmount : null,
       images
     };
     const finalData = {
       ...rawData,
       ...mData
     };
+
+    console.log('>>>>>>>>>>>>>>>>>');
+    console.log(finalData);
 
     if (this.id) {
       const mDataEdit = {...finalData, ...{_id: this.id}};
@@ -387,13 +384,13 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.categoryAttributes = this.categories.find(f => f._id === event.value).attributes as ProductAttribute[];
     this.dataForm.patchValue({subCategory: null});
     // this.removeAttributesFormArray();
-    // this.getAllSubCategoryByCategoryId(event.value, true);
+    this.getAllSubCategoryByCategoryId(event.value, true);
   }
 
   onSelectSubCategory(event: MatSelectChange) {
     // this.dataForm.patchValue({filterData: null, attributes: null});
     // this.removeAttributesFormArray();
-    this.subCategoryAttributes = this.subCategories.find(f => f._id === event.value).attributes as ProductAttribute[];
+    // this.subCategoryAttributes = this.subCategories.find(f => f._id === event.value).attributes as ProductAttribute[];
     // this.hierarchyAttributes();
   }
 
@@ -465,7 +462,44 @@ export class AddProductComponent implements OnInit, OnDestroy {
           // });
           // console.log(this.categoryAttributes);
           this.dataForm.patchValue({category: this.categories.find(f => f._id === category._id)._id});
-          // this.getAllSubCategoryByCategoryId(category._id, false);
+          this.getAllSubCategoryByCategoryId(category._id, false);
+        }
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  private getAllSubCategory() {
+    this.subCategoryService.getAllSubCategory()
+      .subscribe(res => {
+        this.subCategories = res.data;
+        this.filteredSubCatList = this.subCategories.slice();
+        if (this.product) {
+          const subCategory = this.product.subCategory as ProductSubCategory;
+          if (subCategory) {
+            this.dataForm.patchValue({subCategory: this.subCategories.find(f => f._id === subCategory._id)._id});
+          }
+        }
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  private getAllSubCategoryByCategoryId(categoryId: string, selectionChange: boolean) {
+    this.subCategoryService.getSubCategoryByCategoryId(categoryId)
+      .subscribe(res => {
+        this.subCategories = res.data;
+        this.filteredSubCatList = this.subCategories.slice();
+        // if (this.product) {
+        //   this.subCategories.forEach(f => {
+        //     this.subCategoryAttributes = f.attributes as ProductAttribute[];
+        //   });
+        //   console.log(this.subCategoryAttributes);
+        //   this.hierarchyAttributes();
+        // }
+        if (this.product && !selectionChange) {
+          const subCategory = this.product.subCategory as ProductSubCategory;
+          this.dataForm.patchValue({subCategory: this.subCategories.find(f => f._id === subCategory._id)._id});
         }
       }, error => {
         console.log(error);
@@ -494,6 +528,20 @@ export class AddProductComponent implements OnInit, OnDestroy {
         this.filteredUnitTypeList = this.unitTypes.slice();
         if (this.product) {
           this.patchFormValueWithArray();
+        }
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  private getAllGenerics() {
+    this.genericService.getAllGenerics()
+      .subscribe(res => {
+        this.generics = res.data;
+        this.filteredGenericList = this.generics.slice();
+        if (this.product) {
+          const generic = this.product.generic as ProductGeneric;
+          this.dataForm.patchValue({generic: this.generics.find(f => f._id === generic._id)._id});
         }
       }, error => {
         console.log(error);
@@ -556,10 +604,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
         if (this.product) {
           this.patchFormData();
           // // GET ALL SELECTED DATA
-          // this.getAllUnitTypes();
+          this.getAllUnitTypes();
           this.getAllCategory();
           this.getAllBrands();
-          // this.getAllGenerics();
+          this.getAllGenerics();
           // this.getAllTags();
         }
       }, error => {
