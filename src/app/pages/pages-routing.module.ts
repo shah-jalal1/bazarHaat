@@ -39,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'checkout',
-        canActivate: [UserAuthGuard],
+        // canActivate: [UserAuthGuard],
         loadChildren: () => import('./user/checkout/checkout.module').then(m => m.CheckoutModule),
         data: {preload: true, delay: false}
       },

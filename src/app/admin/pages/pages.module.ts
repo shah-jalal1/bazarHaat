@@ -31,6 +31,7 @@ import {ProductTableComponent} from './components/product-table/product-table.co
 import {PipesModule} from '../../shared/pipes/pipes.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ProductViewTableOneComponent} from './components/product-view-table-one/product-view-table-one.component';
+import {CheckAuthAccessGuard} from "../../auth-guard/check-auth-access.guard";
 // import { ImageFolderComponent } from './gallery/image-folder/image-folder.component';
 
 
@@ -43,22 +44,27 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-        // canActivate: [CheckAuthAccessGuard]
+        canActivate: [CheckAuthAccessGuard]
       },
       {
         path: 'brands',
         loadChildren: () => import('./catalog/brands/brands.module').then(m => m.BrandsModule),
-        // canActivate: [CheckAuthAccessGuard]
+        canActivate: [CheckAuthAccessGuard]
       },
       {
         path: 'categories',
         loadChildren: () => import('./catalog/categories/categories.module').then(m => m.CategoriesModule),
-        // canActivate: [CheckAuthAccessGuard]
+        canActivate: [CheckAuthAccessGuard]
       },
       {
         path: 'products',
         loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
         // canActivate: [CheckAuthAccessGuard]
+      },
+      {
+        path: 'products-new',
+        loadChildren: () => import('../pages/products-new/products-new.module').then(m => m.ProductsNewModule),
+        canActivate: [CheckAuthAccessGuard]
       },
       {
         path: 'add-product',
@@ -68,12 +74,12 @@ const routes: Routes = [
       {
         path: 'image-gallery',
         loadChildren: () => import('./gallery/image-gallery/image-gallery.module').then(m => m.ImageGalleryModule),
-        // canActivate: [CheckAuthAccessGuard]
+        canActivate: [CheckAuthAccessGuard]
       },
       {
         path: 'image-folder',
         loadChildren: () => import('./gallery/image-folder/image-folder.module').then(m => m.ImageFolderModule),
-        // canActivate: [CheckAuthAccessGuard]
+        canActivate: [CheckAuthAccessGuard]
       },
       // {
       //   path: 'orders',

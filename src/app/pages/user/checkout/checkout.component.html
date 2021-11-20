@@ -15,7 +15,7 @@
       </div>
     </div>
   </section>
-  
+
   <!---checout-main-area-->
   <section class="checkout">
     <div class="container">
@@ -103,7 +103,7 @@
               </div>
             </div>
             <!---cart-product-->
-  
+
             <!--responsive-cart-product-main-->
             <div class="responsive-cart-product-main">
               <!--cart-product-->
@@ -128,7 +128,7 @@
                     <div class="cart-product-discount">
                       <span>MRP <del>{{c?.product.price}}</del></span>
                     </div>
-  
+
                     <!--cart-items-count-->
                     <div class="cart-items-count">
                       <!---mines-->
@@ -156,10 +156,10 @@
                       <h3>{{c | cartPrice: 'priceWithDiscount' : true | number : '': 'bn'}}</h3>
                     </div>
                   </div>
-  
-  
+
+
                 </div>
-  
+
               </div><!--cart-product--end-->
             </div>
           </div><!---cart-area-left-end-->
@@ -180,14 +180,14 @@
                 <button *ngIf="!couponData" type="button" (click)="applyCoupon()">Apply</button>
                 <button *ngIf="couponData" type="button" (click)="removeCoupon()">Remove</button>
               </div>
-  
+
             </div>
           </div><!--cupon-area-end-->
-  
+
         </div> <!---checkout-cart-end------------------------------------->
-  
-  
-  
+
+
+
         <!----------------------------------checkout-form-area------------------->
         <div class="checkout-form-area">
           <!---form-->
@@ -199,7 +199,7 @@
               <div class="delivery-title">
                 <h3>Delivery Details</h3>
               </div>
-  
+
               <div fxLayout="column"
                     fxLayoutAlign="space-around center">
               <!---user-data-input-->
@@ -220,7 +220,7 @@
                           <input readonly type="text" digitOnly matInput formControlName="phoneNo" placeholder="Enter Your Mobile">
                         </mat-form-field>
                       </div>
-  
+
                     </div>
                     <!--user-email-->
                     <div class="user-email">
@@ -229,7 +229,7 @@
                         <input type="email" matInput formControlName="email" placeholder="Enter Your Email" >
                       </mat-form-field>
                     </div>
-  
+
                     <!--user-town-area-->
                     <div class="user-town-area">
                     </div>
@@ -243,14 +243,14 @@
                 </div>
               </div>
             </div>  <!---form-info-top-end-->
-  
+
             <!---form-info-bottom-->
             <div class="form-info-bottom">
               <!---delivery-title-->
               <div class="delivery-title" style="text-align: center;">
                 <h3>Delivery Details</h3>
               </div>
-  
+
               <!--checkout-paymethod-->
               <div class="checkout-paymethod">
                 <!---paymethod-->
@@ -265,7 +265,7 @@
                     </mat-radio-group>
                   <!---method-img-->
                 </div>
-  
+
                 <!---paymethod-->
   <!--              <div class="paymethod">-->
   <!--                &lt;!&ndash;radio-box&ndash;&gt;-->
@@ -279,9 +279,9 @@
   <!--                  <img src="./assets/images/payments/credit.png" alt="">-->
   <!--                </div>-->
   <!--              </div>-->
-  
+
               </div>
-  
+
               <!---delivery-title-->
               <div class="delivery-title" style="border: none; margin-top: 10px; padding: 0;">
                 <h3>Price Details</h3>
@@ -337,29 +337,28 @@
                     </div>
                   </div>
                 </div><!--total-->
-  
+
                 <div class="checkout-btn" style="margin-bottom: 10px;">
                   <button type="submit" >Place Order Now</button>
                 </div>
-  
+
               </div>
-  
-  
-  
+
+
+
             </div>
-  
-  
-  
-  
-  
+
+
+
+
+
           </form>
         </div><!---checkout-form-area-end-->
-  
+
       </div>  <!---checkout-main-end-->
     </div>
   </section>
-  
-  
-  
-  
-  
+
+
+
+

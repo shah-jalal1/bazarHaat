@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 // import {MenuLevelCatComponent} from './menu-level-cat/menu-level-cat.component';
 import {HomeModule} from '../../pages/home/home.module';
 import {PipesModule} from '../../shared/pipes/pipes.module';
+import { Header3Component } from './header3/header3.component';
 // import {MenuHoverContentComponent} from './mega-menu/menu-hover-content/menu-hover-content.component';
 
 
@@ -20,6 +21,7 @@ import {PipesModule} from '../../shared/pipes/pipes.module';
     MenuComponent,
     HeaderComponent,
     SidenavListComponent,
+    Header3Component,
     // MegaMenuComponent,
     // MenuLevelCatComponent,
     // MenuHoverContentComponent
@@ -34,9 +36,10 @@ import {PipesModule} from '../../shared/pipes/pipes.module';
     HomeModule,
     PipesModule
   ],
-  exports: [
-    MenuComponent
-  ]
+    exports: [
+        MenuComponent,
+        Header3Component
+    ]
 })
 export class MenuModule {
 }

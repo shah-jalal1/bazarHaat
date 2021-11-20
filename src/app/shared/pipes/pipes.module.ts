@@ -17,6 +17,7 @@ import {PricePipe} from './price.pipe';
 // import {FeaturedStatusPipe} from './featured-status.pipe';
 // import {PriceDataPipe} from './price-data.pipe';
 import {CartPricePipe} from './cart-price.pipe';
+import { CartUnitTypePipe } from './cart-unit-type.pipe';
 // import {CartUnitTypePipe} from './cart-unit-type.pipe';
 // import {OrderTypePipe} from './order-type.pipe';
 
@@ -27,6 +28,7 @@ import {CartPricePipe} from './cart-price.pipe';
     PricePipe,
     // PriceDataPipe,
     CartPricePipe,
+    CartUnitTypePipe,
     // CartUnitTypePipe,
     // SafeHtmlCustomPipe,
     // SortPipe,

@@ -165,7 +165,7 @@ export const menuItemsAdmin: MenuAdmin[] = [
     icon: 'follow_the_signs',
     hasSubMenu: false,
     parentId: '100',
-    routerLink: 'products',
+    routerLink: 'products-new',
     href: null,
     target: null
   },
