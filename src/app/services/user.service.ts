@@ -8,7 +8,7 @@ import {environment} from "../../environments/environment";
 import {StorageService} from "./storage.service";
 import {DATABASE_KEY} from "../core/utils/global-variable";
 
-const API_USER = environment.apiBaseLink + '/api/user/';
+const API_USER = environment.apiBaseLink + '/user/';
 
 
 @Injectable({

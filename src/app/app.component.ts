@@ -3,6 +3,7 @@ import {DATABASE_KEY} from './core/utils/global-variable';
 import {NavigationEnd, Router} from '@angular/router';
 import {UserService} from './services/user.service';
 import {isPlatformBrowser, registerLocaleData} from '@angular/common';
+import {AdminService} from "./services/admin.service";
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,16 @@ import {isPlatformBrowser, registerLocaleData} from '@angular/common';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+
   constructor(
+    private adminService: AdminService,
     private userService: UserService,
     public router: Router,
     @Inject(PLATFORM_ID) public platformId: any
   ) {
     this.userService.autoUserLoggedIn();
+    this.adminService.autoAdminLoggedIn();
+
   }
   ngOnInit(): void {
     // localStorage.setItem(DATABASE_KEY.userCart,DATABASE_KEY.userCart);
