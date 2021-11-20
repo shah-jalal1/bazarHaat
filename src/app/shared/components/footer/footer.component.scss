@@ -11,6 +11,7 @@
 .footer-area{
   display: block;
   background-color: $color-primary;
+  color: white;
   padding: 50px 15px 30px 15px;
 }
 
@@ -28,6 +29,6 @@
     grid-template-rows: auto;
     grid-gap: 20px;
     box-sizing: border-box;
-    border-top: 1px solid #ddd;
+    // border-top: 1px solid #ddd;
     text-align: center;
   }
