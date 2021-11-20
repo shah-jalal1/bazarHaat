@@ -193,6 +193,7 @@ export class ProductsNewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subProduct = this.productService.getAllProducts(pagination, this.query)
       .subscribe(res => {
         this.products = res.data;
+        console.log(res.data);
         this.holdPrevData = res.data;
         this.totalProducts = res.count;
         this.totalProductsStore = res.count;

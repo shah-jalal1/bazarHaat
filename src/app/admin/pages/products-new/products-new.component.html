@@ -82,7 +82,8 @@
         </td>
         <td [attr.data-label]="'SKU'">{{data.sku}}</td>
         <td [attr.data-label]="'Category'">{{data.category?.categoryName}}</td>
-        <td [attr.data-label]="'Generic'">{{data.generic?.name}}</td>
+        <td [attr.data-label]="'Category'">{{data.brand?.brandName}}</td>
+<!--        <td [attr.data-label]="'Generic'">{{data.generic?.name}}</td>-->
         <td [attr.data-label]="'Price'">৳ {{data.price && data.price ? (data.price ) : 'N/A'}}</td>
         <!--        <td [attr.data-label]="'Sale Price'">৳ {{data | price: 'priceWithDiscount' | number: '': 'bn'}}</td>-->
         <td [attr.data-label]="'Visibility'">{{data.productVisibility ? 'Yes' : 'No'}}</td>
