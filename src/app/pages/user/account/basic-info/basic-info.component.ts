@@ -32,6 +32,7 @@ export class BasicInfoComponent implements OnInit {
     this.userDataService.getLoggedInUserInfo(select)
       .subscribe(res => {
         this.user = res.data;
+        console.log("User Info", this.user);
       }, error => {
         console.log(error);
       });
