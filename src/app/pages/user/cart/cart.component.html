@@ -1,5 +1,6 @@
-<!-- {{carts | json}} -->
+ {{carts | json}}
 <!--cart-area-->
+
 <div class="cart-area" *ngIf="carts && carts.length > 0 else cartEmpty">
     <div class="container">
       <!---cart-area-main-->
@@ -40,6 +41,11 @@
                             <div class="product-brand">
                               <div><span>Brand:</span></div>
                               <div><a href="javascript:">{{ c?.product?.brandSlug ? c?.product?.brandSlug : 'N/A'}}</a></div>
+                            </div>
+                            <!--cart-product-price--> <!---brand-->
+                            <div class="product-brand">
+                              <div><span>Category:</span></div>
+                              <div><a href="javascript:">{{ c?.product?.categorySlug ? c?.product?.categorySlug : 'N/A'}}</a></div>
                             </div>
                             <!--cart-product-price-->
                             <div class="cart-product-price">
