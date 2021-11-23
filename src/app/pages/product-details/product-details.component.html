@@ -1,3 +1,4 @@
+{{product | json}}
 <section class="product-details">
     <div class="container">
             <!--******* details-main-area *****-->
@@ -18,7 +19,7 @@
           </div>
           <!--- slide-img -->
           <div class="product-img-slide">
-  
+
             <swiper [slidesPerView]="1"
             [autoplay]="{
               delay: 4000,
@@ -39,19 +40,19 @@
               </div>
               </ng-template>
           </swiper>
-  
+
           </div>
         </div>
-  
+
         <!----***** product-info ****-->
-  
+
         <div class="product-info">
-  
+
           <div style="z-index: 9;" #zoomViewer>
             <div *ngIf="zoomImage" class="zoom-viewer"
                  [ngStyle]="{'background-image': 'url(' + zoomImage + ')'}"></div>
           </div> <!-- END IMAGE ZOOM VIEW -->
-  
+
           <!--- product-title -->
           <div class="product-title">
             <h2>{{product?.productName}}</h2>
@@ -60,9 +61,9 @@
           <div class="product-brand-area">
             <div class="product-brand">
               <div><span>Brand:</span></div>
-              <div><a [routerLink]="['/product-list', 'brand', product?.brand]">{{product?.brand}}</a></div>
+              <div><a [routerLink]="['/product-list', 'brand', product?.brand]">{{product?.brand.brandName}}</a></div>
             </div>
-            <span>More Drugs From {{product?.brand}}</span>
+<!--            <span>More Drugs From {{product?.brand}}</span>-->
           </div>
            <!--product-price-->
           <div class="product-price">
@@ -70,7 +71,7 @@
              <!-- [fxShow]="selectedPriceData?.discountAmount && selectedPriceData?.discountAmount > 0" -->
                 <div class="cart-product-discount" >
                   <span>MRP <del>৳{{product?.discountAmount}}</del> <strong> {{product ? product?.discountType : 0}}% OFF</strong></span>
-                </div>              
+                </div>
                 <div class="product-main-price">
                   <h3>৳{{product?.price}}</h3>
                 </div>
@@ -94,11 +95,11 @@
                   <div class="plus-btn">
                     <button type="button" (click)="incrementQty()">+</button>
                   </div>
-    
+
                 </div>
               </div>
             </div>
-  
+
           <!-- Product-aad-and- item value-area  -->
           <div class="product-btn">
            <div class="add-btn" *ngIf="!existsInCart">
@@ -117,8 +118,8 @@
           </div>
         </div>
         <!---product-other-details-area-->
-        
-  
+
+
       </div>
     </div>
 </section>
@@ -135,10 +136,10 @@
             <h3>Description</h3>
           </div>
           <div class="description" [innerHTML]="product?.description"></div>
-  
+
         </div>
       </div>
     </div>
   </section>
-  
+
 
